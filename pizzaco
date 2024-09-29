@@ -1,10 +1,3 @@
-echo "# zalat" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/Huneyydiipppp/zalat.git
-git push -u origin main
 echo 
 "# zalat" >> README.md
 gitinit
@@ -29,7 +22,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter }
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Pizza, Trophy, Users, Clock, Star } from 'lucide-react'
-import dynamic from 'next/dynamic'
+import dynamic from '45/dynamic'
 
 const Confetti = dynamic(() => import('react-confetti'), { ssr: false })
 
@@ -300,94 +293,15 @@ export default function ZalatPizzaApp() {
     </div>
   )
 }
- // Create a subscription
-        const subscription = await stripe.subscriptions.create({
-            customer: customer.id,
-            items: [{ plan: planId }],
-            expand: ['latest_invoice.payment_intent'],
-        });
-
-        try {
-            res.status(201).json({ subscription });
-        } catch (error) {
-            res.status(500).json({ error: error.message });
-        }
-;
-
-module.exports = router;
-sk_test_51Q49TDF5zdA1nobnFzJLvTzZCmAgsAFYuCBLa1cgTwtqRL6zFcXr2R2yghM24RhMSfmYezVyq4IJ6aJbrS2PO5Kt00A83fVBsx
-sk_test_51Q49TDF5zdA1nobnFzJLvTzZCmAgsAFYuCBLa1cgTwtqRL6zFcXr2R2yghM24RhMSfmYezVyq4IJ6aJbrS2PO5Kt00A83fVBsx=
-npminstall
-// First, run this command in your terminal:
-// npm install @stripe/stripe-js
-
-// Then, in your TypeScript/JavaScript file:
-import { loadStripe } from '@stripe/stripe-js';
-
-import { loadStripe } from '@stripe/stripe-js';
-import ZalatPizzaApp from './ZALAT PIZZA MISSION'
-
-const stripePromise = loadStripe('your_publishable_key');
-
-const handleSubscription = async (event) => {
-    event.preventDefault();
-    
-    const stripe = await stripePromise;
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-        type: 'card',
-        card: cardElement, // Assume you have a cardElement from Stripe Elements
-    });
-
-    if (error) {
-        console.error(error);
-        return;
-    }
-
-    // Call your backend to create a subscription
-    const response = await fetch('/api/subscription/subscribe', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            paymentMethodId: paymentMethod.id,
-            planId: 'your_plan_id', // Replace with your actual plan ID
-        }),
-    });
-
-    const subscriptionData = await response.json();
-    console.log(subscriptionData);
-};
-// In routes/subscription.js
-router.post('/webhook', express.raw({ type: 'application/json' }), (req, res) => {
-    const sig = req.headers['stripe-signature'];
-    let event;
-
-    try {
-        event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
-    } catch (err) {
-        console.error(`Webhook Error: ${err.message}`);
-        return res.status(400).send(`Webhook Error: ${err.message}`);
-    }
-
-    // Handle the event
-    switch (event.type) {
-        case 'invoice.payment_succeeded':
-            const subscription = event.data.object;
-            // Handle successful payment
-            break;
-        case 'invoice.payment_failed':
-            // Handle failed payment
-            break;
-        // Add more event types as needed
-        default:
-            console.warn(`Unhandled event type ${event.type}`);
-    }
-
-    res.json({ received: true });
-});
-require('dotenv').config();
 npminstall 
 next.js
 npmrundev  
-
+ZALAT 
+PIZZA 
+MISSION
+vercel 
+promote 
+http://pizzazalatco.vercel.app/]
+vercel 
+deploy 
+--prod  
