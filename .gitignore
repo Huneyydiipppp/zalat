@@ -1,0 +1,23 @@
+echo "# zalat" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/Huneyydiipppp/zalat.git
+git push -u origin main
+echo 
+"# zalat" >> README.md
+gitinit
+gitadd 
+README.md
+gitcommit -m
+"first commit"
+gitbranch -M 
+main
+gitremote 
+add 
+originhttps://github.com/Huneyydiipppp/zalat.git
+gitpush
+ -uorigin 
+main 
+'use client'
