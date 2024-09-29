@@ -1,0 +1,389 @@
+echo "# zalat" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/Huneyydiipppp/zalat.git
+git push -u origin main
+echo 
+"# zalat" >> README.md
+gitinit
+gitadd 
+README.md
+gitcommit -m
+"first commit"
+gitbranch -M 
+main
+gitremote 
+add 
+originhttps://github.com/Huneyydiipppp/zalat.git
+gitpush
+ -uorigin 
+main 
+'use client'
+
+import { useState, useEffect } from 'react'
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Pizza, Trophy, Users, Clock, Star } from 'lucide-react'
+import dynamic from 'next/dynamic'
+
+const Confetti = dynamic(() => import('react-confetti'), { ssr: false })
+
+// PizzaGame Component
+function PizzaGame({ gameTime, addPoints }) {
+  const [score, setScore] = useState(0)
+  const [timeLeft, setTimeLeft] = useState(gameTime)
+  // ... existing code ...
+  useEffect(() => {
+    if (timeLeft > 0) {
+      const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000)
+      return () => clearTimeout(timer)
+    }
+  }, [timeLeft])
+
+  const handleClick = () => {
+    if (timeLeft > 0) {
+      setScore(score + 1)
+      addPoints(10)
+    }
+  }
+
+  return (
+    <div className="text-center">
+      <p className="mb-4">Time left: {timeLeft}s</p>
+      <p className="mb-4">Pizzas made: {score}</p>
+      <Button onClick={handleClick} disabled={timeLeft === 0}>Make Pizza</Button>
+    </div>
+  )
+}
+
+// DeliveryGame Component
+function DeliveryGame({ gameTime, addPoints }) {
+  const [score, setScore] = useState(0)
+  const [timeLeft, setTimeLeft] = useState(gameTime)
+  // ... existing code ...
+  useEffect(() => {
+    if (timeLeft > 0) {
+      const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000)
+      return () => clearTimeout(timer)
+    }
+  }, [timeLeft])
+
+  const handleClick = () => {
+    if (timeLeft > 0) {
+      setScore(score + 1)
+      addPoints(15)
+    }
+  }
+
+  return (
+    <div className="text-center">
+      <p className="mb-4">Time left: {timeLeft}s</p>
+      <p className="mb-4">Deliveries made: {score}</p>
+      <Button onClick={handleClick} disabled={timeLeft === 0}>Deliver Pizza</Button>
+    </div>
+  )
+}
+
+export default function ZalatPizzaApp() {
+  const [gameTime, setGameTime] = useState(35) // 35 seconds
+  const [isSignedUp, setIsSignedUp] = useState(false)
+  const [email, setEmail] = useState('')
+  const [points, setPoints] = useState(0)
+  const [showConfetti, setShowConfetti] = useState(false)
+  const [windowDimensions, setWindowDimensions] = useState({ width: 0, height: 0 })
+
+  useEffect(() => {
+    if (isSignedUp) {
+      setGameTime(prev => prev + 50) // Add 50 seconds for signed up users
+    }
+  }, [isSignedUp])
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowDimensions({ width: window.innerWidth, height: window.innerHeight })
+    }
+
+    handleResize()
+    window.addEventListener('resize', handleResize)
+
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  const handleSignUp = (e) => {
+    e.preventDefault()
+    // Here you would typically send the email to your backend
+    // Here you would typically send the email to your backend
+    console.log('Signed up with:', email)
+    setIsSignedUp(true)
+    setShowConfetti(true)
+    setTimeout(() => setShowConfetti(false), 5000) // Stop confetti after 5 seconds
+  }
+
+  const addPoints = (amount) => {
+    setPoints(prev => prev + amount)
+  }
+
+  const exclusiveDrops = [
+    { 
+      name: "The Truffle Shuffle", 
+      description: "Black truffle oil, wild mushrooms, and creamy burrata",
+      image: "/placeholder.svg?height=200&width=300&text=Truffle+Shuffle",
+      price: "$18.99",
+      available: "Available Now"
+    },
+    { 
+      name: "Spicy Roni Rage", 
+      description: "Double pepperoni with a spicy honey drizzle",
+      image: "/placeholder.svg?height=200&width=300&text=Spicy+Roni+Rage",
+      price: "$16.99",
+      available: "Coming Soon"
+    },
+    { 
+      name: "Veggie Vortex", 
+      description: "A whirlwind of fresh, seasonal vegetables",
+      image: "/placeholder.svg?height=200&width=300&text=Veggie+Vortex",
+      price: "$17.99",
+      available: "Limited Time"
+    },
+  ]
+
+  const leaderboard = [
+    { name: "PizzaMaster", points: 12000 },
+    { name: "CrustCrusader", points: 10500 },
+    { name: "SauceSlinger", points: 9800 },
+    { name: "ToppingTitan", points: 9200 },
+    { name: "DeliveryDemon", points: 8700 },
+  ]
+
+  return (
+    <div className="min-h-screen bg-gradient-to-r from-red-500 to-yellow-500 p-4 md:p-8">
+      {showConfetti && (
+        <Confetti
+          width={windowDimensions.width}
+          height={windowDimensions.height}
+          recycle={false}
+          numberOfPieces={500}
+        />
+      )}
+      <h1 className="text-4xl md:text-6xl font-bold text-center mb-8 text-white drop-shadow-lg" style={{
+        textShadow: '2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000',
+        fontFamily: "'Bungee', cursive"
+      }}>
+        Zalat Pizza Club
+      </h1>
+
+      <Tabs defaultValue="games" className="w-full">
+        <TabsList className="grid w-full grid-cols-3 mb-8">
+          <TabsTrigger value="games">Games</TabsTrigger>
+          <TabsTrigger value="drops">Exclusive Drops</TabsTrigger>
+          <TabsTrigger value="leaderboard">Leaderboard</TabsTrigger>
+        </TabsList>
+        <TabsContent value="games">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <Card className="bg-white/90 backdrop-blur-sm">
+              <CardHeader>
+                <CardTitle className="text-2xl md:text-3xl font-bold text-center">Pizza Maker Challenge</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <PizzaGame gameTime={gameTime} addPoints={addPoints} />
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white/90 backdrop-blur-sm">
+              <CardHeader>
+                <CardTitle className="text-2xl md:text-3xl font-bold text-center">Speedy Delivery Race</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <DeliveryGame gameTime={gameTime} addPoints={addPoints} />
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+        <TabsContent value="drops">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {exclusiveDrops.map((drop, index) => (
+              <Card key={index} className="bg-white/90 backdrop-blur-sm overflow-hidden">
+                <img 
+                  src={drop.image}
+                  alt={drop.name} 
+                  className="w-full h-48 object-cover"
+                />
+                <CardHeader>
+                  <CardTitle className="text-xl font-bold">{drop.name}</CardTitle>
+                  <CardDescription>{drop.description}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex justify-between items-center">
+                    <span className="text-2xl font-bold">{drop.price}</span>
+                    <Badge variant={drop.available === "Available Now" ? "default" : "secondary"}>
+                      {drop.available}
+                    </Badge>
+                  </div>
+                </CardContent>
+                <CardFooter>
+                  <Button className="w-full bg-red-600 hover:bg-red-700 text-white">
+                    {drop.available === "Available Now" ? "Order Now" : "Notify Me"}
+                  </Button>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
+        </TabsContent>
+        <TabsContent value="leaderboard">
+          <Card className="bg-white/90 backdrop-blur-sm">
+            <CardHeader>
+              <CardTitle className="text-2xl md:text-3xl font-bold text-center">Top Pizza Masters</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ul className="space-y-4">
+                {leaderboard.map((player, index) => (
+                  <li key={index} className="flex items-center justify-between p-4 bg-gray-100 rounded-md">
+                    <div className="flex items-center">
+                      <span className="text-2xl font-bold mr-4">{index + 1}</span>
+                      <span className="text-lg">{player.name}</span>
+                    </div>
+                    <Badge variant="secondary" className="text-lg">{player.points} pts</Badge>
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
+
+      <Card className="mt-8 bg-white/90 backdrop-blur-sm">
+        <CardHeader>
+          <CardTitle className="text-2xl md:text-3xl font-bold text-center">Join the Zalat Pizza Club</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSignUp} className="flex flex-col items-center gap-4">
+            <Input 
+              type="email" 
+              placeholder="Enter your email" 
+              value={email} 
+              onChange={(e) => setEmail(e.target.value)}
+              className="max-w-sm"
+            />
+            <Button type="submit" className="bg-red-600 hover:bg-red-700 text-white">
+              Sign Up for Exclusive Benefits
+            </Button>
+          </form>
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+            <div className="flex flex-col items-center">
+              <Pizza className="w-8 h-8 text-red-600 mb-2" />
+              <p className="font-semibold">Early Access to Drops</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <Clock className="w-8 h-8 text-yellow-600 mb-2" />
+              <p className="font-semibold">Bonus Game Time</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <Star className="w-8 h-8 text-orange-600 mb-2" />
+              <p className="font-semibold">Exclusive Events</p>
+            </div>
+          </div>
+          <p className="text-center mt-6">
+            Your Points: <span className="font-bold text-2xl">{points}</span>
+          </p>
+          {points >= 8000 && (
+            <p className="text-center mt-2 text-green-600 font-bold">
+              Congratulations! You've earned a free Zalat Pizza Club T-shirt!
+            </p>
+          )}
+        </CardContent>
+      </Card>
+    </div>
+  )
+}
+ // Create a subscription
+        const subscription = await stripe.subscriptions.create({
+            customer: customer.id,
+            items: [{ plan: planId }],
+            expand: ['latest_invoice.payment_intent'],
+        });
+
+        try {
+            res.status(201).json({ subscription });
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+;
+
+module.exports = router;
+sk_test_51Q49TDF5zdA1nobnFzJLvTzZCmAgsAFYuCBLa1cgTwtqRL6zFcXr2R2yghM24RhMSfmYezVyq4IJ6aJbrS2PO5Kt00A83fVBsx
+sk_test_51Q49TDF5zdA1nobnFzJLvTzZCmAgsAFYuCBLa1cgTwtqRL6zFcXr2R2yghM24RhMSfmYezVyq4IJ6aJbrS2PO5Kt00A83fVBsx=
+npminstall
+// First, run this command in your terminal:
+// npm install @stripe/stripe-js
+
+// Then, in your TypeScript/JavaScript file:
+import { loadStripe } from '@stripe/stripe-js';
+
+import { loadStripe } from '@stripe/stripe-js';
+import ZalatPizzaApp from './ZALAT PIZZA MISSION'
+
+const stripePromise = loadStripe('your_publishable_key');
+
+const handleSubscription = async (event) => {
+    event.preventDefault();
+    
+    const stripe = await stripePromise;
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+        type: 'card',
+        card: cardElement, // Assume you have a cardElement from Stripe Elements
+    });
+
+    if (error) {
+        console.error(error);
+        return;
+    }
+
+    // Call your backend to create a subscription
+    const response = await fetch('/api/subscription/subscribe', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            paymentMethodId: paymentMethod.id,
+            planId: 'your_plan_id', // Replace with your actual plan ID
+        }),
+    });
+
+    const subscriptionData = await response.json();
+    console.log(subscriptionData);
+};
+// In routes/subscription.js
+router.post('/webhook', express.raw({ type: 'application/json' }), (req, res) => {
+    const sig = req.headers['stripe-signature'];
+    let event;
+
+    try {
+        event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
+    } catch (err) {
+        console.error(`Webhook Error: ${err.message}`);
+        return res.status(400).send(`Webhook Error: ${err.message}`);
+    }
+
+    // Handle the event
+    switch (event.type) {
+        case 'invoice.payment_succeeded':
+            const subscription = event.data.object;
+            // Handle successful payment
+            break;
+        case 'invoice.payment_failed':
+            // Handle failed payment
+            break;
+        // Add more event types as needed
+        default:
+            console.warn(`Unhandled event type ${event.type}`);
+    }
+
+    res.json({ received: true });
+});
+require('dotenv').config();
