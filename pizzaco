@@ -1,18 +1,59 @@
+Initialize 
+git 
+repository
+git 
+init
+
+Add 
+README.md
 echo 
 "# zalat" >> README.md
-gitinit
-gitadd 
-README.md
-gitcommit -m
-"first commit"
-gitbranch -M 
-main
-gitremote 
+git 
 add 
-originhttps://github.com/Huneyydiipppp/zalat.git
-gitpush
- -uorigin 
+README.md
+
+Commit 
+changes
+git
+ commit -m 
+"first commit"
+
+Set 
 main 
+branch
+git 
+branch 
+-M 
+main
+
+Add 
+remote 
+repository
+git 
+remote 
+add 
+origin 
+https://github.com/Huneyydiipppp/zalat.git
+
+Push 
+to 
+remote 
+repository
+git 
+push 
+-u 
+origin 
+main
+
+Install
+dependencies
+npm 
+install
+
+Deploy 
+to 
+Vercel
+vercel
 'use client'
 
 import { useState, useEffect } from 'react'
@@ -22,7 +63,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter }
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Pizza, Trophy, Users, Clock, Star } from 'lucide-react'
-import dynamic from '45/dynamic'
+import dynamic from 'next/dynamic'
 
 const Confetti = dynamic(() => import('react-confetti'), { ssr: false })
 
@@ -305,3 +346,13 @@ http://pizzazalatco.vercel.app/]
 vercel 
 deploy 
 --prod  
+npmi -g 
+vercel
+vercel    
+vercel 
+--prod
+"scripts": {
+  "dev": "next dev",
+  "build": "next build",
+  "start": "next start"
+}
